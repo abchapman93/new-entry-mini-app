@@ -7,7 +7,8 @@
       <input type="date" class="form-control" id="date" name="date" required
         [(ngModel)]="model.date"
         #spy>
-      <br>TODO: remove this: {{spy.className}}
+      <!-- <br>TODO: remove this: {{spy.className}}
+      <br>TODO: remove this {{model.date}} -->
     </div>
 
     <div class="form-group">
@@ -20,7 +21,7 @@
       <label for="triggers">Trigger</label>
       <select class="form-control" name="trigger" id="triggers"
               [(ngModel)]="model.trigger" >
-        <option *ngFor="let trig of triggers" [value]="trig"
+        <option *ngFor="let trig of triggers"
           >{{trig}}</option>
         <br>
       </select>

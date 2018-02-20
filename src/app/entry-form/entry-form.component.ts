@@ -18,6 +18,7 @@ export class EntryFormComponent implements OnInit {
   // TODO: remove this
   model = new Entry();
 
+
   submitted = false;
 
   onSubmit() {
