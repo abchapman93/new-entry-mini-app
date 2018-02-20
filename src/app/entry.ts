@@ -56,7 +56,7 @@ export class Entry extends BaseEntryField {
     // TODO: these should be default be empty fields.
     // Figure out how to do that without throwing errors
     this.entryFields = {
-                      'headache': new HeadacheEntry(),
+                      'headache': '',
                       'medications': {},
                       'triggers': {},
                       'comments': ''
@@ -66,16 +66,13 @@ export class Entry extends BaseEntryField {
 
 
 
-    // this.severity = 0;
-    // this.headacheDate = this.setDefaultDate(); // This is the actual date of the headache
-    // this.headacheTime = this.setDefaultTime();
-    // this.triggerDate = this.setDefaultDate(); // The date of the trigger
-    // this.triggerTime = this.setDefaultTime();
-    // this.triggers = [];
-    // this.medications = []; //TODO: change this to a list of MedEntries
-    // this.medicationDate = this.setDefaultDate();
-    // this.medicationTime = this.setDefaultTime();
-    // var exp = $interpolate('{{greeting}} {{name}}!');
+  }
+  /**
+  Initializes a new HeadacheEntry with default values.
+  */
+  addHeadache() {
+    this.entryFields.headache = new HeadacheEntry();
+
   }
   /**
   Removes an entry from the given field.

@@ -14,10 +14,11 @@ export class EntryFormComponent implements OnInit {
   // TODO: Read these in from somewhere else
   TRIGGER_VALUES = ['Air Quality', 'Lack of Sleep',
               'Food', 'Light'];
-  selectedTriggers = [];
 
   MEDICATION_VALUES = ['Ibuprofen 200mg', 'Tylenol 100mg'];
-  selectedMeds = [];
+  hasHeadache = false;
+  hasTrigger = false;
+  hasMeds = false;
 
 
   // triggerValues = ['Air Quality', 'Lack of Sleep',
@@ -33,13 +34,30 @@ export class EntryFormComponent implements OnInit {
 
   submitted = false;
 
-  constructor() { }
+  constructor() {
+  this.selectedTriggers = [];
+  this.selectedMeds = [];
+  }
 
   ngOnInit() {
 
   }
 
+  changeHasHeadache() {
+    console.log(this.hasHeadache);
+    console.log(this.model.entryFields.headache === '');
+    if (this.hasHeadache === false && this.model.entryFields.headache === "")
+      this.model.addHeadache();
+    this.hasHeadache = !this.hasHeadache;
+  }
 
+  changeHasTrigger() {
+    this.hasTrigger = !this.hasTrigger;
+  }
+
+  changeHasMeds() {
+    this.hasMeds = !this.hasMeds;
+  }
 
   toggleTrigger(trig) {
 

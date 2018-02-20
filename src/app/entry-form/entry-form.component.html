@@ -2,8 +2,11 @@
   <h1>New Entry</h1>
   <form (ngSubmit)="onSubmit()" #entryForm="ngForm">
     {{diagnostic}}
+
+
     <h2>Headache</h2>
-    <div class="form-group">
+    <button type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
+    <div *ngIf="hasHeadache" class="form-group">
       <label for="headacheDate">Date: </label>
       <input type="date" class="form-control" id="headacheDate" name="headacheDate"
         [(ngModel)]="model.entryFields.headache.date"
@@ -16,10 +19,12 @@
         <input type="number" name="severity"  class="form-control" value="0"
             [(ngModel)]="model.entryFields.headache.severity">
     </div>
-
-    <div class="form-group">
+    <br>
+    <h2>Triggers</h2>
+    <button *ngIf="!hasTrigger" type="button" name="add-trigger" (click)="changeHasTrigger()">Add Triggers</button>
+    <button *ngIf="hasTrigger" type="button" name="remove-triggers" (click)="changeHasTrigger()">Hide Triggers</button>
+    <div *ngIf="hasTrigger" class="form-group">
       <br>
-      <h2>Triggers</h2>
       <ul class="triggers">
         <li *ngFor="let trig of TRIGGER_VALUES; index as i"
           [class.selected]="selectedTriggers.includes(trig)"
@@ -33,9 +38,14 @@
             [(ngModel)]="model.triggerTime"> -->
         </li>
       </ul>
+    </div>
 
-      <h2>Medications</h2>
-      <div class="form-group" *ngFor="let med of MEDICATION_VALUES">
+    <h2>Medications</h2>
+    <br>
+    <button *ngIf="!hasMeds" type="button" name="add-meds" (click)="changeHasMeds()">Add Medications</button>
+    <button *ngIf="hasMeds" type="button" name="hide-meds" (click)="changeHasMeds()">Hide Medications</button>
+    <div *ngIf="hasMeds" class="form-group">
+      <div *ngFor="let med of MEDICATION_VALUES">
           <input type="checkbox" name="medication" value="" (click)="toggleMedication(med)">{{med}}
           <input type="date" name="medDate" value=""
             [(ngModel)]="model.medicationDate">
@@ -44,18 +54,6 @@
       </div>
     </div>
 
-      <!-- <input *ngFor="let trig of triggerValues" type="checkbox" name="triggers" [(ngModel)]="model.trigger"
-            value="trig"> -->
-      <!-- <select class="form-control" name="trigger" id="triggers"
-              [(ngModel)]="model.trigger" >
-        <option *ngFor="let trig of triggerValues"
-          >{{trig}}</option>
-        <br>
-      </select> -->
-      <!-- TODO: remove this: {{model.trigger}}
-    </div>
-
-    <!-- TODO: the Triggers should really go here, but for some reason it goes over the button -->
     <h2>Comments</h2>
     <div class="form-group">
       <!-- <input type="text" id="comments" value="Tell us what's going on."> -->
