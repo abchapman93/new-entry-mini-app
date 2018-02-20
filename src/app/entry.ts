@@ -4,6 +4,7 @@ export class Entry {
     let fullDate = new Date();
     // this.date = '' +  fullDate.getDate() + '/' + fullDate.getMonth() + '/' + fullDate.getFullYear();
     this.date = this.setDefaultDate();
+    this.triggers = [];
     // var exp = $interpolate('{{greeting}} {{name}}!');
   }
 

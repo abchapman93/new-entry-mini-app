@@ -10,16 +10,25 @@ import { Entry } from '../entry';
 export class EntryFormComponent implements OnInit {
 
 
-  triggers = ['Air Quality', 'Lack of Sleep',
-              'Food'];
+  triggerValues = ['Air Quality', 'Lack of Sleep',
+              'Food', 'Light'];
 
   medications = ['Ibuprofen', 'Tylenol'];
+
+  String[] selectedTriggers = [];
 
   // TODO: remove this
   model = new Entry();
 
 
   submitted = false;
+
+  toggleTrigger(trig) {
+    if (this.model.triggers.includes(trig)
+      this.model.triggers.splice(this.model.triggers.indexOf(trig), 1);
+    else
+      this.model.triggers.push(trig);
+  }
 
   onSubmit() {
     this.submitted = true;

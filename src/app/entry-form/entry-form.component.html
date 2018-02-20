@@ -18,13 +18,24 @@
           [(ngModel)]="model.severity">
       TODO: remove this: {{model.severity}}
       <br>
-      <label for="triggers">Trigger</label>
-      <select class="form-control" name="trigger" id="triggers"
+      <h2>Triggers</h2>
+      <ul class="triggers">
+        <li *ngFor="let trig of triggerValues"
+          [class.selected]="model.triggers.includes(trig)"
+          (click)="toggleTrigger(trig)">
+          <span class="badge">{{trig}}</span>
+
+        </li>
+      </ul>
+
+      <!-- <input *ngFor="let trig of triggerValues" type="checkbox" name="triggers" [(ngModel)]="model.trigger"
+            value="trig"> -->
+      <!-- <select class="form-control" name="trigger" id="triggers"
               [(ngModel)]="model.trigger" >
-        <option *ngFor="let trig of triggers"
+        <option *ngFor="let trig of triggerValues"
           >{{trig}}</option>
         <br>
-      </select>
+      </select> -->
       <!-- TODO: remove this: {{model.trigger}} -->
     </div>
 
