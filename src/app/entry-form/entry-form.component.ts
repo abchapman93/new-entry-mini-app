@@ -42,6 +42,7 @@ export class EntryFormComponent implements OnInit {
 
 
   toggleTrigger(trig) {
+
     // If this trigger was already selected
     if (this.selectedTriggers.includes(trig)){
       // Remove it from selected triggers
@@ -63,6 +64,12 @@ export class EntryFormComponent implements OnInit {
       this.model.medications.splice(this.model.medications.indexOf(med), 1);
     else
       this.model.medications.push(med);
+  }
+
+  setTriggerWithDate(trig, date) {
+    this.model.addEntry("triggers", trig);
+    this.model.entryFields["triggers"][trig].date = date;
+    console.log(trig+ date);
   }
 
 

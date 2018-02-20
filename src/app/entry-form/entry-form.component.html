@@ -21,18 +21,17 @@
       <br>
       <h2>Triggers</h2>
       <ul class="triggers">
-        <li *ngFor="let trig of TRIGGER_VALUES"
+        <li *ngFor="let trig of TRIGGER_VALUES; index as i"
           [class.selected]="selectedTriggers.includes(trig)"
           (click)="toggleTrigger(trig)">
           <span class="badge">{{trig}}</span>
+
+          <input type="date" class="form-control" name="triggerDate"
+            [ngModel]="model.entryFields.triggers[trig]?.date"
+            (ngModelChange)="setTriggerWithDate(trig, $event)">
+          <!-- <input type="time" name="triggerTime" value=""
+            [(ngModel)]="model.triggerTime"> -->
         </li>
-        <label for="headacheDate">Date: </label>
-        <input type="date" class="form-control" name="triggerDate"
-          [(ngModel)]="model.triggerDate"
-          #spy>
-        <label for="triggerTime">Time:</label>
-        <input type="time" name="triggerTime" value=""
-          [(ngModel)]="model.triggerTime">
       </ul>
 
       <h2>Medications</h2>
