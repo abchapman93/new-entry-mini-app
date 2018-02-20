@@ -5,7 +5,12 @@
 
 
     <h2>Headache</h2>
-    <button type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
+    <div *ngIf="!hasHeadache"class="">
+      <button type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
+    </div>
+    <div *ngIf="hasHeadache"class="">
+      <button type="button" name="button" (click)="changeHasHeadache()">Remove Headache</button>
+    </div>
     <div *ngIf="hasHeadache" class="form-group">
       <label for="headacheDate">Date: </label>
       <input type="date" class="form-control" id="headacheDate" name="headacheDate"

@@ -74,6 +74,10 @@ export class Entry extends BaseEntryField {
     this.entryFields.headache = new HeadacheEntry();
 
   }
+
+  removeHeadache() {
+    this.entryFields.headache = '';
+  }
   /**
   Removes an entry from the given field.
   @param field: the name of the field, should be either 'triggers' or 'medications'

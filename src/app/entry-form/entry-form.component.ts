@@ -44,10 +44,10 @@ export class EntryFormComponent implements OnInit {
   }
 
   changeHasHeadache() {
-    console.log(this.hasHeadache);
-    console.log(this.model.entryFields.headache === '');
     if (this.hasHeadache === false && this.model.entryFields.headache === "")
       this.model.addHeadache();
+    else if (this.hasHeadache === true)
+      this.model.removeHeadache();
     this.hasHeadache = !this.hasHeadache;
   }
 
