@@ -56,6 +56,8 @@ export class Entry extends BaseEntryField {
     // TODO: these should be default be empty fields.
     // Figure out how to do that without throwing errors
     this.entryFields = {
+                      // TODO: author should be set some other way
+                      'author': "Mrs. Julia's Mom"
                       'headache': '',
                       'medications': {},
                       'triggers': {},
