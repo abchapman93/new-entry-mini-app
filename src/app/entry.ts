@@ -1,11 +1,9 @@
-export class Entry {
+export class BaseEntryField {
+
   constructor() {
-    this.severity = 0;
     let fullDate = new Date();
-    // this.date = '' +  fullDate.getDate() + '/' + fullDate.getMonth() + '/' + fullDate.getFullYear();
     this.date = this.setDefaultDate();
-    this.triggers = [];
-    // var exp = $interpolate('{{greeting}} {{name}}!');
+    this.time = this.setDefaultTime();
   }
 
   setDefaultDate() {
@@ -20,5 +18,116 @@ export class Entry {
     }
     let y = fullDate.getFullYear();
     return '' + y + '-' + m + '-' + d;
+  }
+
+  /**
+  Returns a string format of the current time
+  %H-%M
+  */
+  setDefaultTime() {
+    let fullDate = new Date();
+    let h = fullDate.getHours();
+    if (h < 10)
+      h = '0' + h;
+    let m = fullDate.getMinutes();
+    if (m < 10)
+      m = '0' + m;
+
+    return h + ':' + m;
+
+
+  }
+
+  setDefaultDateTime() {
+    // "2018-02-21T01:00"
+    let fullDate = new Date();
+
+  }
+
+}
+
+/**
+Class that represents an entire entry.
+*/
+export class Entry extends BaseEntryField {
+  constructor() {
+    super();
+
+    // TODO: these should be default be empty fields.
+    // Figure out how to do that without throwing errors
+    this.entryFields = {
+                      'headache': new HeadacheEntry(),
+                      'medications': {},
+                      'triggers': {},
+                      'comments': ''
+                        } // This will contain strings mapping to EntryFields
+                          // ie., "headache": HeadacheEntry, etc...
+
+
+
+
+    // this.severity = 0;
+    // this.headacheDate = this.setDefaultDate(); // This is the actual date of the headache
+    // this.headacheTime = this.setDefaultTime();
+    // this.triggerDate = this.setDefaultDate(); // The date of the trigger
+    // this.triggerTime = this.setDefaultTime();
+    // this.triggers = [];
+    // this.medications = []; //TODO: change this to a list of MedEntries
+    // this.medicationDate = this.setDefaultDate();
+    // this.medicationTime = this.setDefaultTime();
+    // var exp = $interpolate('{{greeting}} {{name}}!');
+  }
+  /**
+  Removes an entry from the given field.
+  @param field: the name of the field, should be either 'triggers' or 'medications'
+  @param name: the value of the 'name' field in the object. Should be the string name of a trigger or med
+  */
+  removeEntry(field, name) {
+    // console.log(arr);
+    delete this.entryFields[field][name];
+    // for (let i=0; i < this.entryFields[field].length; i++) {
+      // if (this.entryFields[field][i].name == name) {
+        // this.entryFields[field].splice(i, 1)
+        // return
+      // }
+//
+    // }
+
+  }
+
+  addEntry(field, name) {
+    console.log(this.entryFields);
+    if (field === 'medication')
+      this.entryFields.medications[name] = new MedicationEntry(name);
+
+    if (field === 'triggers'){
+      this.entryFields.triggers[name] = new TriggerEntry(name);
+    }
+  }
+
+
+}
+
+
+class HeadacheEntry extends BaseEntryField {
+  constructor(name) {
+    super();
+    this.severity = 0;
+
+
+  }
+}
+
+class MedicationEntry extends BaseEntryField {
+  constructor(name) {
+    super();
+    this.name = name;
+  }
+}
+
+class TriggerEntry extends BaseEntryField {
+  constructor(name) {
+    super();
+    this.name = name;
   }
 }

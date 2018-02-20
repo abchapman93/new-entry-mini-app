@@ -7,15 +7,25 @@ import { Entry } from '../entry';
   templateUrl: './entry-form.component.html',
   styleUrls: ['./entry-form.component.css']
 })
+
+
 export class EntryFormComponent implements OnInit {
 
-
-  triggerValues = ['Air Quality', 'Lack of Sleep',
+  // TODO: Read these in from somewhere else
+  TRIGGER_VALUES = ['Air Quality', 'Lack of Sleep',
               'Food', 'Light'];
+  selectedTriggers = [];
 
-  medications = ['Ibuprofen', 'Tylenol'];
+  MEDICATION_VALUES = ['Ibuprofen 200mg', 'Tylenol 100mg'];
+  selectedMeds = [];
 
-  String[] selectedTriggers = [];
+
+  // triggerValues = ['Air Quality', 'Lack of Sleep',
+  //             'Food', 'Light'];
+  //
+  // medicationValues = ['Ibuprofen 200mg', 'Tylenol 100mg'];
+
+  // String[] selectedTriggers = [];
 
   // TODO: remove this
   model = new Entry();
@@ -23,12 +33,38 @@ export class EntryFormComponent implements OnInit {
 
   submitted = false;
 
-  toggleTrigger(trig) {
-    if (this.model.triggers.includes(trig)
-      this.model.triggers.splice(this.model.triggers.indexOf(trig), 1);
-    else
-      this.model.triggers.push(trig);
+  constructor() { }
+
+  ngOnInit() {
+
   }
+
+
+
+  toggleTrigger(trig) {
+    // If this trigger was already selected
+    if (this.selectedTriggers.includes(trig)){
+      // Remove it from selected triggers
+      this.selectedTriggers.splice(this.selectedTriggers.indexOf(trig), 1);
+      // Remove it from the Entry's triggers list
+      this.model.removeEntry('triggers', trig);
+    }
+    else {
+      console.log("Name of trig" + trig);
+      this.selectedTriggers.push(trig);
+      // Add it to the Entry's triggers list
+      this.model.addEntry('triggers', trig)
+    }
+  }
+
+
+  toggleMedication(med) {
+    if (this.model.medications.includes(med))
+      this.model.medications.splice(this.model.medications.indexOf(med), 1);
+    else
+      this.model.medications.push(med);
+  }
+
 
   onSubmit() {
     this.submitted = true;

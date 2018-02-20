@@ -1,3 +1,7 @@
+h1 {
+  text-align:  center
+}
+
 .selected .badge {
   background-color: #4b4f54;
   color: white;
