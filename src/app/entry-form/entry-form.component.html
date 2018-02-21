@@ -5,19 +5,16 @@
 
 
     <h2>Headache</h2>
-    <div *ngIf="!hasHeadache"class="">
-      <button type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
-    </div>
     <div *ngIf="hasHeadache"class="">
       <button type="button" name="button" (click)="changeHasHeadache()">Remove Headache</button>
     </div>
-    <div *ngIf="hasHeadache" class="form-group">
+    <div class="form-group">
       <label for="headacheDate">Date: </label>
-      <input type="date" class="form-control" id="headacheDate" name="headacheDate"
+      <input (click)="hasHeadacheToTrue()" type="date" class="form-control" id="headacheDate" name="headacheDate"
         [(ngModel)]="model.entryFields.headache.date"
         #spy>
       <label for="headacheTime">Time:</label>
-      <input type="time" name="headacheTime" value=""
+      <input (click)="hasHeadacheToTrue()" type="time" name="headacheTime" value=""
         [(ngModel)]="model.entryFields.headache.time">
         <br>
         <label for="severity">Severity: </label>
@@ -31,6 +28,7 @@
     <div *ngIf="hasTrigger" class="form-group">
       <br>
       <ul class="triggers">
+        <!-- TODO: separate the inputs and the labels -->
         <li *ngFor="let trig of TRIGGER_VALUES; index as i"
           [class.selected]="selectedTriggers.includes(trig)"
           (click)="toggleTrigger(trig)">
@@ -38,13 +36,14 @@
 
           <input type="date" class="form-control" name="triggerDate"
             [ngModel]="model.entryFields.triggers[trig]?.date"
-            (ngModelChange)="setTriggerWithDate(trig, $event)">
+            (ngModelChange)="setEntryWithDate('triggers', trig, $event)">
           <!-- <input type="time" name="triggerTime" value=""
             [(ngModel)]="model.triggerTime"> -->
         </li>
       </ul>
     </div>
 
+    <!-- TODO: fix the medications -->
     <h2>Medications</h2>
     <br>
     <button *ngIf="!hasMeds" type="button" name="add-meds" (click)="changeHasMeds()">Add Medications</button>
@@ -53,9 +52,10 @@
       <div *ngFor="let med of MEDICATION_VALUES">
           <input type="checkbox" name="medication" value="" (click)="toggleMedication(med)">{{med}}
           <input type="date" name="medDate" value=""
-            [(ngModel)]="model.medicationDate">
-          <input type="time" name="medTime" value=""
-            [(ngModel)]="model.medicationTime">
+            [ngModel]="model.entryFields.medications[med]?.time"
+            (ngModel)="setEntryWithDate('medications', med, $event)">
+          <!-- <input type="time" name="medTime" value=""
+            [(ngModel)]="model.entryFields.medications[med].time"> -->
       </div>
     </div>
 

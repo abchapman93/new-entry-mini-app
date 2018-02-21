@@ -43,6 +43,11 @@ export class EntryFormComponent implements OnInit {
 
   }
 
+  hasHeadacheToTrue() {
+    this.hasHeadache = true;
+    this.model.addHeadache();
+  }
+
   changeHasHeadache() {
     if (this.hasHeadache === false && this.model.entryFields.headache === "")
       this.model.addHeadache();
@@ -72,22 +77,24 @@ export class EntryFormComponent implements OnInit {
       console.log("Name of trig" + trig);
       this.selectedTriggers.push(trig);
       // Add it to the Entry's triggers list
-      this.model.addEntry('triggers', trig)
+      this.model.addEntry('triggers', trig);
     }
   }
 
 
   toggleMedication(med) {
-    if (this.model.medications.includes(med))
-      this.model.medications.splice(this.model.medications.indexOf(med), 1);
-    else
-      this.model.medications.push(med);
+    if (this.selectedMeds.includes(med))
+      this.selectedMeds.splice(this.selectedMeds.indexOf(med), 1);
+    else {
+      this.selectedMeds.push(med);
+      this.model.addEntry('medications', med);
+    }
   }
 
-  setTriggerWithDate(trig, date) {
-    this.model.addEntry("triggers", trig);
-    this.model.entryFields["triggers"][trig].date = date;
-    console.log(trig+ date);
+  setEntryWithDate(field, value, date) {
+    this.model.addEntry(field, value);
+    this.model.entryFields[field][value].date = date;
+    // console.log(trig+ date);
   }
 
 
