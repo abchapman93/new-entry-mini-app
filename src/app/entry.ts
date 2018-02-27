@@ -62,7 +62,7 @@ export class Entry extends BaseEntryField {
                       'author': "Mrs. Julia's Mom",
                       'headache': '',
                       'medications': {},
-                      'triggers': {},
+                      'triggers': [],
                       'comments': ''
                         } // This will contain strings mapping to EntryFields
                           // ie., "headache": HeadacheEntry, etc...
@@ -101,14 +101,16 @@ export class Entry extends BaseEntryField {
   }
 
   addEntry(field, name) {
-    console.log("Here")
+    console.log("Here now")
     console.log(field + name);
     console.log(this.entryFields);
     if (field === 'medication')
       this.entryFields.medications[name] = new MedicationEntry(name);
 
     if (field === 'triggers'){
-      this.entryFields.triggers[name] = new TriggerEntry(name);
+      console.log("here!!!")
+      // Changing this to be a list
+      this.entryFields.triggers.push(new TriggerEntry(name));
     }
   }
 

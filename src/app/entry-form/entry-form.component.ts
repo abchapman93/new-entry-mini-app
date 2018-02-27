@@ -12,8 +12,10 @@ import { Entry } from '../entry';
 export class EntryFormComponent implements OnInit {
 
   // TODO: Read these in from somewhere else
-  TRIGGER_VALUES = ['Air Quality', 'Lack of Sleep',
+  TRIGGER_NAMES = ['Air Quality', 'Lack of Sleep',
               'Food', 'Light'];
+  TRIGGER_VALUES = [];
+
 
   MEDICATION_VALUES = ['Ibuprofen 200mg', 'Tylenol 100mg'];
   hasHeadache = false;
@@ -39,6 +41,9 @@ export class EntryFormComponent implements OnInit {
 
   constructor() {
     this.numTriggers = [];
+    for (name in this.TRIGGER_NAMES) {
+      this.TRIGGER_VALUES.push(new Entry(name)); 
+    }
   }
 
   ngOnInit() {
@@ -59,6 +64,10 @@ export class EntryFormComponent implements OnInit {
   }
 
   addOneTrigger() {
+    console.log("In addOneTrigger")
+    console.log(this.model.entryFields['triggers'].length)
+    if (this.model.entryFields['triggers'].length === this.TRIGGER_VALUES.length)
+      return
     this.numTriggers.push(this.numTriggers.length + 1);
     this.hasTrigger = true;
     this.model.addEntry('triggers', this.TRIGGER_VALUES[this.numTriggers.length-1]);
