@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Entry } from '../entry';
+import { Entry, MedicationEntry, TriggerEntry,  HeadacheEntry } from '../entry';
 
 @Component({
   selector: 'app-entry-form',
@@ -12,9 +12,9 @@ import { Entry } from '../entry';
 export class EntryFormComponent implements OnInit {
 
   // TODO: Read these in from somewhere else
-  TRIGGER_NAMES = ['Air Quality', 'Lack of Sleep',
+  TRIGGER_VALUES = ['Air Quality', 'Lack of Sleep',
               'Food', 'Light'];
-  TRIGGER_VALUES = [];
+  // TRIGGER_VALUES = [];
 
 
   MEDICATION_VALUES = ['Ibuprofen 200mg', 'Tylenol 100mg'];
@@ -41,13 +41,19 @@ export class EntryFormComponent implements OnInit {
 
   constructor() {
     this.numTriggers = [];
-    for (name in this.TRIGGER_NAMES) {
-      this.TRIGGER_VALUES.push(new Entry(name)); 
-    }
+    console.log(this.TRIGGER_NAMES);
+    // for (name of this.TRIGGER_NAMES) {
+    //   console.log("Trigger name: " + name)
+    //   this.TRIGGER_VALUES.push(new TriggerEntry(name));
+    // }
   }
 
   ngOnInit() {
 
+  }
+
+  getTriggerValues() {
+    return this.TRIGGER_VALUES;
   }
 
   hasHeadacheToTrue() {
@@ -65,6 +71,7 @@ export class EntryFormComponent implements OnInit {
 
   addOneTrigger() {
     console.log("In addOneTrigger")
+    console.log(this.TRIGGER_VALUES);
     console.log(this.model.entryFields['triggers'].length)
     if (this.model.entryFields['triggers'].length === this.TRIGGER_VALUES.length)
       return

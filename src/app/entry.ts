@@ -90,27 +90,20 @@ export class Entry extends BaseEntryField {
   removeEntry(field, name) {
     // console.log(arr);
     delete this.entryFields[field][name];
-    // for (let i=0; i < this.entryFields[field].length; i++) {
-      // if (this.entryFields[field][i].name == name) {
-        // this.entryFields[field].splice(i, 1)
-        // return
-      // }
-//
-    // }
 
   }
 
   addEntry(field, name) {
-    console.log("Here now")
-    console.log(field + name);
-    console.log(this.entryFields);
+    console.log("Here in addEntry" );
+    console.log(name);
     if (field === 'medication')
       this.entryFields.medications[name] = new MedicationEntry(name);
 
     if (field === 'triggers'){
       console.log("here!!!")
       // Changing this to be a list
-      this.entryFields.triggers.push(new TriggerEntry(name));
+      this.entryFields.triggers.push( new TriggerEntry(name));
+      // this.entryFields.triggers.push(new TriggerEntry(name));
     }
   }
 
@@ -118,7 +111,7 @@ export class Entry extends BaseEntryField {
 }
 
 
-class HeadacheEntry extends BaseEntryField {
+export class HeadacheEntry extends BaseEntryField {
   constructor(name) {
     super();
     this.severity = 0;
@@ -127,14 +120,14 @@ class HeadacheEntry extends BaseEntryField {
   }
 }
 
-class MedicationEntry extends BaseEntryField {
+export class MedicationEntry extends BaseEntryField {
   constructor(name) {
     super();
     this.name = name;
   }
 }
 
-class TriggerEntry extends BaseEntryField {
+export class TriggerEntry extends BaseEntryField {
   constructor(name) {
     super();
     this.name = name;

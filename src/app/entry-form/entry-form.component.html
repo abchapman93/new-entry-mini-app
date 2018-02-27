@@ -32,35 +32,28 @@
 
     <br>
     <h2>Triggers</h2>
-    <!-- <button *ngIf="!hasTrigger" type="button" name="add-trigger" (click)="changeHasTrigger()">Add Triggers</button> -->
-    <!-- <button *ngIf="hasTrigger" type="button" name="remove-triggers" (click)="changeHasTrigger()">Hide Triggers</button> -->
-    <!-- Whenever add-trigger is clicked, add a new dropdown -->
     <button type="button" name="add-trigger" (click)="addOneTrigger()">Add Trigger</button>
     <div *ngIf="hasTrigger" class="form-group">
       <br>
-
-
           <div class="" *ngFor="let entry of model.entryFields['triggers']; index as i" >
-            <select class="" name="trigger"
-              [(ngModel)]="model.entryFields.triggers[i]['name']"
+            <!-- <h4>{{model.entryFields.triggers[i].name}}</h4> -->
+            <label for="trigger-{{i}}">{{model.entryFields.triggers[i].name}}</label>
+            <br>
+            <!-- TODO: Figure out how to get the text in the drop-down menus to stay the same after adding a new trigger  -->
+            <select class="" name="trigger" id="trigger-{{i}}"
+              [(ngModel)]="entry['name']"
             >
-              <option *ngFor="let trig of TRIGGER_VALUES"
-              [selected]="trig==='Air Quality'"
-                >{{trig.name}}</option>
+              <option *ngFor="let trig of getTriggerValues()"
+                [value]="trig"
+                >{{trig}}</option>
             </select>
+            <input type="date" name="trigDate" value=""
+              [ngModel]="entry.date | date:'yyyy-MM-dd'"
+              (ngModelChange)="entry.date = $event">
+            <input type="time" name="trigTime" value=""
+            [ngModel]="entry.time"
+            >
           </div>
-
-      <!-- <ul class="triggers">
-        <li *ngFor="let trig of TRIGGER_VALUES; index as i"
-          [class.selected]="selectedTriggers.includes(trig)"
-          (click)="toggleTrigger(trig)">
-          <span class="badge">{{trig}}</span>
-
-          <input type="date" class="form-control" name="triggerDate"
-            [ngModel]="model.entryFields.triggers[trig]?.date"
-            (ngModelChange)="setEntryWithDate('triggers', trig, $event)">
-        </li>
-      </ul> -->
     </div>
 
     <!-- TODO: fix the medications -->
