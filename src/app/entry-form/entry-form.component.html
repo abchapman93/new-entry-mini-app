@@ -5,10 +5,15 @@
 
 
     <h2>Headache</h2>
-    <div *ngIf="hasHeadache"class="">
-      <button type="button" name="button" (click)="changeHasHeadache()">Remove Headache</button>
+    <div *ngIf="!hasHeadache; then content else other_content"class="">
     </div>
-    <div class="form-group">
+    <ng-template #content>
+      <button  #content type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
+    </ng-template>
+    <ng-template #other_content>
+      <button  #other_content type="button" name="button" (click)="changeHasHeadache()">Remove Headache</button>
+    </ng-template>
+    <div *ngIf="hasHeadache" class="form-group">
       <label for="headacheDate">Date: </label>
       <input (click)="hasHeadacheToTrue()" type="date" class="form-control" id="headacheDate" name="headacheDate"
         [(ngModel)]="model.entryFields.headache.date"
@@ -18,9 +23,13 @@
         [(ngModel)]="model.entryFields.headache.time">
         <br>
         <label for="severity">Severity: </label>
-        <input type="number" name="severity"  class="form-control" value="0"
-            [(ngModel)]="model.entryFields.headache.severity">
+        <select class="" name="severity" [(ngModel)]="model.entryFields.headache.severity">
+           <option *ngFor="let number of [0,1,2,3,4, 5, 6, 7, 8, 9, 10]">{{number}}</option>
+        </select>
+        <!-- <input type="number" name="severity"  class="form-control" value="0"
+            [(ngModel)]="model.entryFields.headache.severity"> -->
     </div>
+
     <br>
     <h2>Triggers</h2>
     <button *ngIf="!hasTrigger" type="button" name="add-trigger" (click)="changeHasTrigger()">Add Triggers</button>

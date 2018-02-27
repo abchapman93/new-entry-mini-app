@@ -50,6 +50,8 @@ export class BaseEntryField {
 Class that represents an entire entry.
 */
 export class Entry extends BaseEntryField {
+  entryFields: object;
+
   constructor() {
     super();
 

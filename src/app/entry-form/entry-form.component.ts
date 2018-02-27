@@ -28,15 +28,14 @@ export class EntryFormComponent implements OnInit {
 
   // String[] selectedTriggers = [];
 
-  // TODO: remove this
   model = new Entry();
+  selectedTriggers = [];
+  selectedMeds = [];
 
 
   submitted = false;
 
   constructor() {
-  this.selectedTriggers = [];
-  this.selectedMeds = [];
   }
 
   ngOnInit() {
@@ -107,9 +106,6 @@ export class EntryFormComponent implements OnInit {
 
   get diagnostic() {return JSON.stringify(this.model);}
 
-  constructor() { }
 
-  ngOnInit() {
-  }
 
 }
