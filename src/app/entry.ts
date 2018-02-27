@@ -101,6 +101,8 @@ export class Entry extends BaseEntryField {
   }
 
   addEntry(field, name) {
+    console.log("Here")
+    console.log(field + name);
     console.log(this.entryFields);
     if (field === 'medication')
       this.entryFields.medications[name] = new MedicationEntry(name);

@@ -32,10 +32,13 @@ export class EntryFormComponent implements OnInit {
   selectedTriggers = [];
   selectedMeds = [];
 
+  numTriggers: array;
+
 
   submitted = false;
 
   constructor() {
+    this.numTriggers = [];
   }
 
   ngOnInit() {
@@ -55,6 +58,12 @@ export class EntryFormComponent implements OnInit {
     this.hasHeadache = !this.hasHeadache;
   }
 
+  addOneTrigger() {
+    this.numTriggers.push(this.numTriggers.length + 1);
+    this.hasTrigger = true;
+    this.model.addEntry('triggers', this.TRIGGER_VALUES[this.numTriggers.length-1]);
+  }
+
   changeHasTrigger() {
     this.hasTrigger = !this.hasTrigger;
   }
@@ -64,6 +73,7 @@ export class EntryFormComponent implements OnInit {
   }
 
   toggleTrigger(trig) {
+    console.log("Here" + trig);
 
     // If this trigger was already selected
     if (this.selectedTriggers.includes(trig)){

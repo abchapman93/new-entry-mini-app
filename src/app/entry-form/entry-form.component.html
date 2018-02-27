@@ -5,26 +5,26 @@
 
 
     <h2>Headache</h2>
-    <div *ngIf="!hasHeadache; then content else other_content"class="">
+    <div *ngIf="!hasHeadache; then can_add_headache else can_remove_headache"class="">
     </div>
-    <ng-template #content>
-      <button  #content type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
+    <ng-template #can_add_headache>
+      <button type="button" name="button" (click)="changeHasHeadache()">Add Headache</button>
     </ng-template>
-    <ng-template #other_content>
-      <button  #other_content type="button" name="button" (click)="changeHasHeadache()">Remove Headache</button>
+    <ng-template #can_remove_headache>
+      <button type="button" name="button" (click)="changeHasHeadache()">Remove Headache</button>
     </ng-template>
     <div *ngIf="hasHeadache" class="form-group">
       <label for="headacheDate">Date: </label>
-      <input (click)="hasHeadacheToTrue()" type="date" class="form-control" id="headacheDate" name="headacheDate"
+      <input type="date" class="form-control" id="headacheDate" name="headacheDate"
         [(ngModel)]="model.entryFields.headache.date"
         #spy>
       <label for="headacheTime">Time:</label>
-      <input (click)="hasHeadacheToTrue()" type="time" name="headacheTime" value=""
+      <input type="time" name="headacheTime" value=""
         [(ngModel)]="model.entryFields.headache.time">
         <br>
         <label for="severity">Severity: </label>
         <select class="" name="severity" [(ngModel)]="model.entryFields.headache.severity">
-           <option *ngFor="let number of [0,1,2,3,4, 5, 6, 7, 8, 9, 10]">{{number}}</option>
+           <option *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">{{number}}</option>
         </select>
         <!-- <input type="number" name="severity"  class="form-control" value="0"
             [(ngModel)]="model.entryFields.headache.severity"> -->
@@ -32,12 +32,28 @@
 
     <br>
     <h2>Triggers</h2>
-    <button *ngIf="!hasTrigger" type="button" name="add-trigger" (click)="changeHasTrigger()">Add Triggers</button>
-    <button *ngIf="hasTrigger" type="button" name="remove-triggers" (click)="changeHasTrigger()">Hide Triggers</button>
+    <!-- <button *ngIf="!hasTrigger" type="button" name="add-trigger" (click)="changeHasTrigger()">Add Triggers</button> -->
+    <!-- <button *ngIf="hasTrigger" type="button" name="remove-triggers" (click)="changeHasTrigger()">Hide Triggers</button> -->
+    <!-- Whenever add-trigger is clicked, add a new dropdown -->
+    <button type="button" name="add-trigger" (click)="addOneTrigger()">Add Trigger</button>
     <div *ngIf="hasTrigger" class="form-group">
       <br>
-      <ul class="triggers">
-        <!-- TODO: separate the inputs and the labels -->
+
+
+          <div class="" *ngFor="let num of numTriggers; index as i" >
+            <select class="" name="trigger"
+              >
+              <!-- (ngModelChange)="toggleTrigger(trig)" -->
+              <option *ngFor="let trig of TRIGGER_VALUES"
+              (ngModelChange)="model.addEntry('triggers', trig)"
+              value="trig]"
+              >{{trig}}</option>
+            </select>
+          </div>
+          <!-- [ngModel]="model.entryFields.triggers[trig]?.date" -->
+          <!-- (ngModelChange)="setEntryWithDate('triggers', trig, $event)" -->
+
+      <!-- <ul class="triggers">
         <li *ngFor="let trig of TRIGGER_VALUES; index as i"
           [class.selected]="selectedTriggers.includes(trig)"
           (click)="toggleTrigger(trig)">
@@ -46,10 +62,8 @@
           <input type="date" class="form-control" name="triggerDate"
             [ngModel]="model.entryFields.triggers[trig]?.date"
             (ngModelChange)="setEntryWithDate('triggers', trig, $event)">
-          <!-- <input type="time" name="triggerTime" value=""
-            [(ngModel)]="model.triggerTime"> -->
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <!-- TODO: fix the medications -->
