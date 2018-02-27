@@ -51,10 +51,13 @@ Class that represents an entire entry.
 */
 export class Entry extends BaseEntryField {
   entryFields: object;
+  newTrigger: TriggerEntry;
+  newHeadache: HeadacheEntry;
 
   constructor() {
     super();
 
+    this.newHeadache = new HeadacheEntry();
     // TODO: these should be default be empty fields.
     // Figure out how to do that without throwing errors
     this.entryFields = {

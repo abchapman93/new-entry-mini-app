@@ -41,6 +41,7 @@ export class EntryFormComponent implements OnInit {
 
   constructor() {
     this.numTriggers = [];
+
     console.log(this.TRIGGER_NAMES);
     // for (name of this.TRIGGER_NAMES) {
     //   console.log("Trigger name: " + name)
@@ -72,12 +73,51 @@ export class EntryFormComponent implements OnInit {
   addOneTrigger() {
     console.log("In addOneTrigger")
     console.log(this.TRIGGER_VALUES);
-    console.log(this.model.entryFields['triggers'].length)
-    if (this.model.entryFields['triggers'].length === this.TRIGGER_VALUES.length)
-      return
-    this.numTriggers.push(this.numTriggers.length + 1);
+    console.log()
+
+    this.model.newTrigger = new TriggerEntry('Air Quality');
+
+    console.log("New Headache")
+    console.log(this.newHeadache)
     this.hasTrigger = true;
-    this.model.addEntry('triggers', this.TRIGGER_VALUES[this.numTriggers.length-1]);
+    console.log(this.model.newTrigger);
+    return
+  }
+
+  /**
+  Adds the `newTrigger` field to the Entry's current triggers
+  */
+  addNewTrigger() {
+    console.log("In addNewTrigger");
+    this.model.newTrigger.idx = this.model.entryFields['triggers'].length;
+    let newTrigger = Object.assign({}, this.model.newTrigger);
+    this.model.entryFields['triggers'].push(newTrigger);
+    this.model.newTrigger = new TriggerEntry('Air Quality');
+  }
+  /**
+  Removes the trigger from entryFields.triggers at idx
+  */
+  removeTrigger(idx) {
+    // Populate the newTrigger field with this
+    this.model.newTrigger = this.model.entryFields['triggers'].splice(idx, 1)[0];
+
+    // Now change idxs in the remaining trigger entries
+    for (let i = idx; i<this.model.entryFields.triggers.length; i++) {
+      this.model.entryFields.triggers[i].idx = i;
+  }
+
+
+  }
+
+  addNewHeadache() {
+    let newHeadache = Object.assign({},  this.model.newHeadache);
+    this.model.headache = newHeadache;
+    this.hasHeadache = true;
+  }
+
+  removeHeadache() {
+    this.model.entryFields.headache = '';
+    this.changeHasHeadache();
   }
 
   changeHasTrigger() {
