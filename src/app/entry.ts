@@ -57,7 +57,7 @@ export class Entry extends BaseEntryField {
     // Figure out how to do that without throwing errors
     this.entryFields = {
                       // TODO: author should be set some other way
-                      'author': "Mrs. Julia's Mom"
+                      'author': "Mrs. Julia's Mom",
                       'headache': '',
                       'medications': {},
                       'triggers': {},
