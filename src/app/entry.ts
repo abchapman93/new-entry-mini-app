@@ -16,6 +16,7 @@ export class BaseEntryField {
     if (m < 10) {
       m = '0' + m;
     }
+
     let y = fullDate.getFullYear();
     return '' + y + '-' + m + '-' + d;
   }
@@ -37,13 +38,6 @@ export class BaseEntryField {
 
 
   }
-
-  setDefaultDateTime() {
-    // "2018-02-21T01:00"
-    let fullDate = new Date();
-
-  }
-
 }
 
 /**
@@ -51,68 +45,24 @@ Class that represents an entire entry.
 */
 export class Entry extends BaseEntryField {
   entryFields: object;
-  newTrigger: TriggerEntry;
-  newHeadache: HeadacheEntry;
+  newTrigger: TriggerEntry; // This is the pending trigger that hasn't been added yet
+  newHeadache: HeadacheEntry; // This is the pending headache
 
   constructor() {
     super();
-
     this.newHeadache = new HeadacheEntry();
     this.newTrigger = new TriggerEntry("Air Quality");
-    // TODO: these should be default be empty fields.
-    // Figure out how to do that without throwing errors
+
     this.entryFields = {
                       // TODO: author should be set some other way
                       'author': "Mrs. Julia's Mom",
-                      'headache': '',
+                      'headache': '', // TODO: change this to null
                       'medications': {},
                       'triggers': [],
                       'comments': ''
                         } // This will contain strings mapping to EntryFields
                           // ie., "headache": HeadacheEntry, etc...
-
-
-
-
   }
-  /**
-  Initializes a new HeadacheEntry with default values.
-  */
-  addHeadache() {
-    this.entryFields.headache = new HeadacheEntry();
-
-  }
-
-  removeHeadache() {
-    this.entryFields.headache = '';
-  }
-  /**
-  Removes an entry from the given field.
-  @param field: the name of the field, should be either 'triggers' or 'medications'
-  @param name: the value of the 'name' field in the object. Should be the string name of a trigger or med
-  */
-  removeEntry(field, name) {
-    // console.log(arr);
-    delete this.entryFields[field][name];
-
-  }
-
-  addEntry(field, name) {
-    console.log("Here in addEntry" );
-    console.log(name);
-    if (field === 'medication')
-      this.entryFields.medications[name] = new MedicationEntry(name);
-
-    if (field === 'triggers'){
-      console.log("here!!!")
-      // Changing this to be a list
-      this.entryFields.triggers.push( new TriggerEntry(name));
-      // this.entryFields.triggers.push(new TriggerEntry(name));
-    }
-  }
-
-
-}
 
 
 export class HeadacheEntry extends BaseEntryField {
