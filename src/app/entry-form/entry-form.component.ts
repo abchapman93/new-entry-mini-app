@@ -11,18 +11,18 @@ import { Entry, MedicationEntry, TriggerEntry,  HeadacheEntry } from '../entry';
 
 export class EntryFormComponent implements OnInit {
 
-  // TODO: Read these in from somewhere else
+  // Hardcoded values for triggers and meds
   TRIGGER_VALUES = ['Air Quality', 'Lack of Sleep',
               'Food', 'Light'];
-  // TRIGGER_VALUES = [];
-
-
   MEDICATION_VALUES = ['Ibuprofen 200mg', 'Tylenol 100mg'];
 
-  model = new Entry();
-  submitted = false;
+  model: Entry;
+  submitted: boolean;
 
-  constructor() { }
+  constructor() {
+    this.model = new Entry();
+    this.submitted = false;
+   }
 
   ngOnInit() { }
 
@@ -58,7 +58,7 @@ export class EntryFormComponent implements OnInit {
     this.model.entryFields['triggers'].push(newTrigger);
     this.model.newTrigger = new TriggerEntry('Air Quality');
   }
-  
+
   /**
   Removes the trigger from entryFields.triggers at idx
   */

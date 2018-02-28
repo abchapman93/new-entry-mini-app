@@ -1,5 +1,9 @@
 export class BaseEntryField {
 
+  fullDate: Date;
+  date: String;
+  time: String;
+
   constructor() {
     let fullDate = new Date();
     this.date = this.setDefaultDate();
@@ -44,15 +48,16 @@ export class BaseEntryField {
 Class that represents an entire entry.
 */
 export class Entry extends BaseEntryField {
-  entryFields: object;
   newTrigger: TriggerEntry; // This is the pending trigger that hasn't been added yet
   newHeadache: HeadacheEntry; // This is the pending headache
+  entryFields: object; // This will contain all the data from the form
 
   constructor() {
     super();
     this.newHeadache = new HeadacheEntry();
     this.newTrigger = new TriggerEntry("Air Quality");
 
+    // TODO: Is there a better way to do this? Maybe it should have its own class or interface
     this.entryFields = {
                       // TODO: author should be set some other way
                       'author': "Mrs. Julia's Mom",
@@ -60,11 +65,11 @@ export class Entry extends BaseEntryField {
                       'medications': {},
                       'triggers': [],
                       'comments': ''
-                        } // This will contain strings mapping to EntryFields
-                          // ie., "headache": HeadacheEntry, etc...
+                        }
+
   }
 
-
+// TODO: You could make these private and add the setters to Entry
 export class HeadacheEntry extends BaseEntryField {
   constructor(name) {
     super();
