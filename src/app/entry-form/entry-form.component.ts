@@ -89,6 +89,7 @@ export class EntryFormComponent implements OnInit {
   */
   addNewTrigger() {
     console.log("In addNewTrigger");
+    this.hasTrigger = true;
     this.model.newTrigger.idx = this.model.entryFields['triggers'].length;
     let newTrigger = Object.assign({}, this.model.newTrigger);
     this.model.entryFields['triggers'].push(newTrigger);
@@ -111,7 +112,7 @@ export class EntryFormComponent implements OnInit {
 
   addNewHeadache() {
     let newHeadache = Object.assign({},  this.model.newHeadache);
-    this.model.headache = newHeadache;
+    this.model.entryFields.headache = newHeadache;
     this.hasHeadache = true;
   }
 

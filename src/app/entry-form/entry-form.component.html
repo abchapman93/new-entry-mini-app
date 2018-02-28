@@ -1,33 +1,35 @@
 <div class="container">
   <h1>New Entry</h1>
   <form (ngSubmit)="onSubmit()" #entryForm="ngForm">
+    DIAGNOSTIC:
     {{diagnostic}}
+    <div class="report">
 
-    <h3>Entry In Progress</h3>
-    <!-- Display all the variables that have been created -->
-        <!-- TODO: give each new entry it's own template or something -->
-    <div *ngIf="hasHeadache">
+      <h3>Entry In Progress</h3>
+      <!-- Display all the variables that have been created -->
+          <!-- TODO: give each new entry it's own template or something -->
       <h4 class="entryHeader">Headache:</h4>
-      <button type="button" name="button" (click)="removeHeadache()">Remove</button>
-      <ul>
-        <li>
-          <span class="badge">Severity: {{model.entryFields.headache.severity}}</span>
-        </li>
-        <li>
-          <span class="badge">{{model.entryFields['headache']['date'] + ' ' + model.entryFields['headache']['time']}}</span>
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="hasTrigger">
+      <div *ngIf="hasHeadache">
+        <ul>
+          <li>
+            <span class="badge">Severity: {{model.entryFields['headache']['severity']}}
+                Date: {{model.entryFields['headache']['date'] + ' ' + model.entryFields['headache']['time']}}
+            </span>
+            <button type="button" name="button" (click)="removeHeadache()">Remove</button>
+          </li>
+        </ul>
+      </div>
       <h4 class="entryHeader">Triggers:</h4>
-      <ul>
-        <li  *ngFor="let entry of model.entryFields['triggers']; index as i"
-              name="currentTriggers">
-          <span class="badge" >{{entry.name}} {{entry.date}} {{entry.time}}</span>
-          <button type="button" name="button" (click)="removeTrigger(i)">Remove</button>
-        </li>
+      <div *ngIf="hasTrigger">
+        <ul>
+          <li  *ngFor="let entry of model.entryFields['triggers']; index as i"
+                name="currentTriggers">
+            <span class="badge" >{{entry.name}} {{entry.date}} {{entry.time}}</span>
+            <button type="button" name="button" (click)="removeTrigger(i)">Remove</button>
+          </li>
 
-      </ul>
+        </ul>
+      </div>
     </div>
 
 
@@ -53,11 +55,8 @@
 
     <br>
     <h2>Triggers</h2>
-    <button type="button" name="add-trigger" (click)="addOneTrigger()">Add Trigger</button>
-    <div *ngIf="hasTrigger" class="form-group">
-      <br >
-
-
+    <!-- <button *ngIf="!hasTrigger" type="button" name="add-trigger" (click)="addOneTrigger()">Add Trigger</button> -->
+    <div class="form-group">
       <br>
       <!-- Field for new Trigger -->
       <div class="" name="newTrigger">

@@ -58,6 +58,7 @@ export class Entry extends BaseEntryField {
     super();
 
     this.newHeadache = new HeadacheEntry();
+    this.newTrigger = new TriggerEntry("Air Quality");
     // TODO: these should be default be empty fields.
     // Figure out how to do that without throwing errors
     this.entryFields = {
