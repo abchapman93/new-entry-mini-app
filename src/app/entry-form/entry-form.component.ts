@@ -75,6 +75,7 @@ export class EntryFormComponent implements OnInit {
   }
 
 
+
   onSubmit() {
     this.submitted = true;
 

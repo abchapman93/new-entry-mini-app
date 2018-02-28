@@ -76,19 +76,7 @@
 
     <!-- TODO: fix the medications -->
     <h2>Medications</h2>
-    <br>
-    <button *ngIf="!hasMeds" type="button" name="add-meds" (click)="changeHasMeds()">Add Medications</button>
-    <button *ngIf="hasMeds" type="button" name="hide-meds" (click)="changeHasMeds()">Hide Medications</button>
-    <div *ngIf="hasMeds" class="form-group">
-      <div *ngFor="let med of MEDICATION_VALUES">
-          <input type="checkbox" name="medication" value="" (click)="toggleMedication(med)">{{med}}
-          <input type="date" name="medDate" value=""
-            [ngModel]="model.entryFields.medications[med]?.time"
-            (ngModel)="setEntryWithDate('medications', med, $event)">
-          <!-- <input type="time" name="medTime" value=""
-            [(ngModel)]="model.entryFields.medications[med].time"> -->
-      </div>
-    </div>
+    Coming soon...
 
     <h2>Comments</h2>
     <div class="form-group">

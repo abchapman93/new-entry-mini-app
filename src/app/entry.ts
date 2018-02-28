@@ -71,6 +71,8 @@ export class Entry extends BaseEntryField {
 
 // TODO: You could make these private and add the setters to Entry
 export class HeadacheEntry extends BaseEntryField {
+
+  severity: number;
   constructor(name) {
     super();
     this.severity = 0;
@@ -80,6 +82,9 @@ export class HeadacheEntry extends BaseEntryField {
 }
 
 export class MedicationEntry extends BaseEntryField {
+
+  name: String;
+
   constructor(name) {
     super();
     this.name = name;
@@ -87,6 +92,8 @@ export class MedicationEntry extends BaseEntryField {
 }
 
 export class TriggerEntry extends BaseEntryField {
+
+  name: String;
   constructor(name) {
     super();
     this.name = name;
