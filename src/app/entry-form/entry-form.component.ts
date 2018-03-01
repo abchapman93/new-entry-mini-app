@@ -17,19 +17,24 @@ export class EntryFormComponent implements OnInit {
               'Food', 'Light'];
   MEDICATION_VALUES = ['Ibuprofen 200mg', 'Tylenol 100mg'];
 
+
   model: Entry;
   submitted: boolean;
 
   constructor() {
     this.model = new Entry();
     this.submitted = false;
+    // Entries in progress
+    this.newHeadache = new HeadacheEntry();
+    this.newTrigger = new TriggerEntry("Air Quality");
+    this.newMedication = new MedicationEntry("Ibuprofen 200mg")
    }
 
   ngOnInit() { }
 
-  getEntries(): void {
-    // this.entries = this.entryFormService.getEntries();
-  }
+  // // getEntries() {
+  //   this.entries = this.entryFormService.getEntries();
+  // }
 
   hasTrigger() {
     return this.model.entryFields.triggers.length > 0;
@@ -45,7 +50,7 @@ export class EntryFormComponent implements OnInit {
 
   addNewHeadache() {
     // Copy the object that I've been called 'newHeadache'
-    let newHeadache = Object.assign({},  this.model.newHeadache);
+    let newHeadache = Object.assign({},  this.newHeadache);
     this.model.entryFields.headache = newHeadache;
   }
 
@@ -58,10 +63,10 @@ export class EntryFormComponent implements OnInit {
   Adds the `newTrigger` field to the Entry's current triggers
   */
   addNewTrigger() {
-    this.model.newTrigger.idx = this.model.entryFields['triggers'].length;
-    let newTrigger = Object.assign({}, this.model.newTrigger);
+    this.newTrigger.idx = this.model.entryFields['triggers'].length;
+    let newTrigger = Object.assign({}, this.newTrigger);
     this.model.entryFields['triggers'].push(newTrigger);
-    this.model.newTrigger = new TriggerEntry('Air Quality');
+    this.newTrigger = new TriggerEntry('Air Quality');
   }
 
   /**
@@ -78,10 +83,10 @@ export class EntryFormComponent implements OnInit {
   }
 
   addNewMedication() {
-    this.model.newMedication.idx = this.model.entryFields['medications'].length;
-    let newMed = Object.assign({}, this.model.newMedication);
+    this.newMedication.idx = this.model.entryFields['medications'].length;
+    let newMed = Object.assign({}, this.newMedication);
     this.model.entryFields['medications'].push(newMed);
-    this.model.newMedication = new MedicationEntry('Ibuprofen 200mg');
+    this.newMedication = new MedicationEntry('Ibuprofen 200mg');
   }
 
   removeMedication(idx) {

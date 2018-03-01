@@ -54,9 +54,6 @@ export class Entry extends BaseEntryField {
 
   constructor() {
     super();
-    this.newHeadache = new HeadacheEntry();
-    this.newTrigger = new TriggerEntry("Air Quality");
-    this.newMedication = new MedicationEntry("Ibuprofen 200mg")
 
     // TODO: Is there a better way to do this? Maybe it should have its own class or interface
     this.entryFields = {

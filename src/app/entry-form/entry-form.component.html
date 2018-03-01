@@ -50,14 +50,14 @@
     <div class="form-group">
       <label for="headacheDate">Date: </label>
       <input type="date" class="form-control" id="headacheDate" name="headacheDate"
-        [(ngModel)]="model.newHeadache.date"
+        [(ngModel)]="newHeadache.date"
         #spy>
       <label for="headacheTime">Time:</label>
       <input type="time" name="headacheTime" value=""
-        [(ngModel)]="model.newHeadache.time">
+        [(ngModel)]="newHeadache.time">
         <br>
         <label for="severity">Severity: </label>
-        <select class="" name="severity" [(ngModel)]="model.newHeadache.severity">
+        <select class="" name="severity" [(ngModel)]="newHeadache.severity">
            <option *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">{{number}}</option>
         </select>
       <button (click)="addNewHeadache()" type="button" name="button">Enter</button>
@@ -70,16 +70,16 @@
       <!-- Field for new Trigger -->
       <div class="" name="newTrigger">
         <select class="" name="trigger"
-          [(ngModel)]="model.newTrigger.name">
+          [(ngModel)]="newTrigger.name">
           <option *ngFor="let trig of TRIGGER_VALUES; "
             [value]="trig"
             >{{trig}}</option>
         </select>
         <input type="date" name="trigDate" value=""
-          [ngModel]="model.newTrigger.date | date:'yyyy-MM-dd'"
-          (ngModelChange)="model.newTrigger.date = $event">
+          [ngModel]="newTrigger.date | date:'yyyy-MM-dd'"
+          (ngModelChange)="newTrigger.date = $event">
         <input type="time" name="trigTime" value=""
-        [ngModel]="model.newTrigger.time"
+        [ngModel]="newTrigger.time"
         >
         <button type="button" name="addTrigger" (click)="addNewTrigger()">Enter</button>
       </div>
@@ -93,16 +93,16 @@
       <!-- Field for new Trigger -->
       <div class="" name="newMedication">
         <select class="" name="medication"
-          [(ngModel)]="model.newMedication.name">
+          [(ngModel)]="newMedication.name">
           <option *ngFor="let med of MEDICATION_VALUES; "
             [value]="med"
             >{{med}}</option>
         </select>
         <input type="date" name="medDate" value=""
-          [ngModel]="model.newMedication.date | date:'yyyy-MM-dd'"
-          (ngModelChange)="model.newMedication.date = $event">
+          [ngModel]="newMedication.date | date:'yyyy-MM-dd'"
+          (ngModelChange)="newMedication.date = $event">
         <input type="time" name="medTime" value=""
-        [ngModel]="model.newMedication.time"
+        [ngModel]="newMedication.time"
         >
         <button type="button" name="addMedication" (click)="addNewMedication()">Enter</button>
       </div>
