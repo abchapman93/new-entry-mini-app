@@ -45,7 +45,7 @@ export class EntryFormComponent implements OnInit {
   }
 
   hasHeadache() {
-    return this.model.entryFields.headache != '';
+    return this.model.entryFields.headache != null;
   }
 
   getTriggerValues() {
@@ -59,7 +59,7 @@ export class EntryFormComponent implements OnInit {
   }
 
   removeHeadache() {
-    this.model.entryFields.headache = '';
+    this.model.entryFields.headache = null;
   }
 
 

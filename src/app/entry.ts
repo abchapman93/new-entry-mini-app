@@ -11,18 +11,27 @@ export class BaseEntryField {
   }
 
   setDefaultDate() {
+
+    let dateString = '';
     let fullDate = new Date();
-    let d = fullDate.getDate();
-    if (d < 10) {
-      d = '0' + d;
-    }
+    dateString += fullDate.getFullYear() + '-';
+
+
     let m = fullDate.getMonth();
     if (m < 10) {
-      m = '0' + m;
+      dateString += '0' + m.toString() + '-';
     }
-
-    let y = fullDate.getFullYear();
-    return '' + y + '-' + m + '-' + d;
+    else {
+      dateString += m.toString() + '-';
+    }
+    let d = fullDate.getDate();
+    if (d < 10) {
+      dateString += '0' + d.toString();
+    }
+    else {
+      dateString += d.toString();
+    }
+    return dateString;
   }
 
   /**
@@ -32,13 +41,19 @@ export class BaseEntryField {
   setDefaultTime() {
     let fullDate = new Date();
     let h = fullDate.getHours();
+    let hourString = '';
     if (h < 10)
-      h = '0' + h;
+      hourString += '0' + h.toString() + ':';
+    else
+      hourString += h.toString() + ':'
+
     let m = fullDate.getMinutes();
     if (m < 10)
-      m = '0' + m;
+      hourString += '0' + m.toString();
+    else
+      hourString += m.toString();
 
-    return h + ':' + m;
+    return hourString;
 
 
   }
@@ -50,7 +65,7 @@ Class that represents an entire entry.
 class Entry extends BaseEntryField {
 
 
-  entryFields: {};
+  entryFields: EntryField; // An interface
 
   constructor() {
     super();
@@ -59,7 +74,7 @@ class Entry extends BaseEntryField {
     this.entryFields = {
                       // TODO: author should be set some other way
                       'author': "Mrs. Julia's Mom",
-                      'headache': '', // TODO: change this to null
+                      'headache': null, // TODO: change this to null
                       'medications': [],
                       'triggers': [],
                       'comments': ''
@@ -71,6 +86,8 @@ class Entry extends BaseEntryField {
 
 
 class HeadacheEntry extends BaseEntryField {
+  severity: number;
+  idx?: number;
 
   constructor() {
     super();
@@ -83,6 +100,7 @@ class HeadacheEntry extends BaseEntryField {
 class MedicationEntry extends BaseEntryField {
 
   name: String;
+  idx?: number;
 
   constructor(name: String) {
     super();
@@ -93,10 +111,19 @@ class MedicationEntry extends BaseEntryField {
 class TriggerEntry extends BaseEntryField {
 
   name: String;
+  idx?: number;
   constructor(name: String) {
     super();
     this.name = name;
   }
+}
+
+interface EntryField {
+  author: string;
+  headache?: HeadacheEntry;
+  triggers?: TriggerEntry[];
+  medications?: MedicationEntry[];
+  comments: string;
 }
 
 
