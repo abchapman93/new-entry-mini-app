@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Entry, MedicationEntry, TriggerEntry,  HeadacheEntry } from '../entry';
 
+
 @Component({
   selector: 'app-entry-form',
   templateUrl: './entry-form.component.html',
@@ -25,6 +26,10 @@ export class EntryFormComponent implements OnInit {
    }
 
   ngOnInit() { }
+
+  getEntries(): void {
+    // this.entries = this.entryFormService.getEntries();
+  }
 
   hasTrigger() {
     return this.model.entryFields.triggers.length > 0;
@@ -63,15 +68,28 @@ export class EntryFormComponent implements OnInit {
   Removes the trigger from entryFields.triggers at idx
   */
   removeTrigger(idx) {
-    // Populate the newTrigger field with this
-    this.model.newTrigger = this.model.entryFields['triggers'].splice(idx, 1)[0];
+    // Remove the previous trigger
+    this.model.entryFields['triggers'].splice(idx, 1);
 
     // Now change idxs in the remaining trigger entries
     for (let i = idx; i<this.model.entryFields.triggers.length; i++) {
       this.model.entryFields.triggers[i].idx = i;
     }
+  }
 
+  addNewMedication() {
+    this.model.newMedication.idx = this.model.entryFields['medications'].length;
+    let newMed = Object.assign({}, this.model.newMedication);
+    this.model.entryFields['medications'].push(newMed);
+    this.model.newMedication = new MedicationEntry('Ibuprofen 200mg');
+  }
 
+  removeMedication(idx) {
+    this.model.entryFields['medications'].splice(idx, 1);
+    // Now change idxs in the remaining trigger entries
+    for (let i = idx; i<this.model.entryFields.medications.length; i++) {
+      this.model.entryFields.medications[i].idx = i;
+    }
   }
 
 

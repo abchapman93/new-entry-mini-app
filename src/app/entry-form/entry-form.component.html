@@ -1,8 +1,8 @@
 <div class="container">
   <h1>New Entry</h1>
   <form (ngSubmit)="onSubmit()" #entryForm="ngForm">
-    DIAGNOSTIC:
-    {{diagnostic}}
+    <!-- DIAGNOSTIC:
+    {{diagnostic}} -->
     <div class="report">
 
       <h3>Entry In Progress</h3>
@@ -26,6 +26,18 @@
                 name="currentTriggers">
             <span class="badge" >{{entry.name}} {{entry.date}} {{entry.time}}</span>
             <button type="button" name="button" (click)="removeTrigger(i)">Remove</button>
+          </li>
+
+        </ul>
+      </div>
+
+      <h4 class="entryHeader">Medications:</h4>
+      <div>
+        <ul>
+          <li  *ngFor="let entry of model.entryFields['medications']; index as i"
+                name="currentMeds">
+            <span class="badge" >{{entry.name}} {{entry.date}} {{entry.time}}</span>
+            <button type="button" name="button" (click)="removeMedication(i)">Remove</button>
           </li>
 
         </ul>
@@ -76,7 +88,25 @@
 
     <!-- TODO: fix the medications -->
     <h2>Medications</h2>
-    Coming soon...
+    <div class="form-group">
+      <br>
+      <!-- Field for new Trigger -->
+      <div class="" name="newMedication">
+        <select class="" name="medication"
+          [(ngModel)]="model.newMedication.name">
+          <option *ngFor="let med of MEDICATION_VALUES; "
+            [value]="med"
+            >{{med}}</option>
+        </select>
+        <input type="date" name="medDate" value=""
+          [ngModel]="model.newMedication.date | date:'yyyy-MM-dd'"
+          (ngModelChange)="model.newMedication.date = $event">
+        <input type="time" name="medTime" value=""
+        [ngModel]="model.newMedication.time"
+        >
+        <button type="button" name="addMedication" (click)="addNewMedication()">Enter</button>
+      </div>
+    </div>
 
     <h2>Comments</h2>
     <div class="form-group">

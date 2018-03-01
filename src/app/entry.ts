@@ -56,13 +56,14 @@ export class Entry extends BaseEntryField {
     super();
     this.newHeadache = new HeadacheEntry();
     this.newTrigger = new TriggerEntry("Air Quality");
+    this.newMedication = new MedicationEntry("Ibuprofen 200mg")
 
     // TODO: Is there a better way to do this? Maybe it should have its own class or interface
     this.entryFields = {
                       // TODO: author should be set some other way
                       'author': "Mrs. Julia's Mom",
                       'headache': '', // TODO: change this to null
-                      'medications': {},
+                      'medications': [],
                       'triggers': [],
                       'comments': ''
                         }
@@ -73,7 +74,7 @@ export class Entry extends BaseEntryField {
 export class HeadacheEntry extends BaseEntryField {
 
   severity: number;
-  constructor(name) {
+  constructor() {
     super();
     this.severity = 0;
 
@@ -85,7 +86,7 @@ export class MedicationEntry extends BaseEntryField {
 
   name: String;
 
-  constructor(name) {
+  constructor(name: String) {
     super();
     this.name = name;
   }
@@ -94,7 +95,7 @@ export class MedicationEntry extends BaseEntryField {
 export class TriggerEntry extends BaseEntryField {
 
   name: String;
-  constructor(name) {
+  constructor(name: String) {
     super();
     this.name = name;
   }
