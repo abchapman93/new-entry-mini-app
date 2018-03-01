@@ -47,10 +47,10 @@ export class BaseEntryField {
 /**
 Class that represents an entire entry.
 */
-export class Entry extends BaseEntryField {
-  newTrigger: TriggerEntry; // This is the pending trigger that hasn't been added yet
-  newHeadache: HeadacheEntry; // This is the pending headache
-  entryFields: object; // This will contain all the data from the form
+class Entry extends BaseEntryField {
+
+
+  entryFields: {};
 
   constructor() {
     super();
@@ -63,12 +63,14 @@ export class Entry extends BaseEntryField {
                       'medications': [],
                       'triggers': [],
                       'comments': ''
-                        }
+    }
+
 
   }
+}
 
-// TODO: You could make these private and add the setters to Entry
-export class HeadacheEntry extends BaseEntryField {
+
+class HeadacheEntry extends BaseEntryField {
 
   constructor() {
     super();
@@ -78,7 +80,7 @@ export class HeadacheEntry extends BaseEntryField {
   }
 }
 
-export class MedicationEntry extends BaseEntryField {
+class MedicationEntry extends BaseEntryField {
 
   name: String;
 
@@ -88,7 +90,7 @@ export class MedicationEntry extends BaseEntryField {
   }
 }
 
-export class TriggerEntry extends BaseEntryField {
+class TriggerEntry extends BaseEntryField {
 
   name: String;
   constructor(name: String) {
@@ -96,3 +98,6 @@ export class TriggerEntry extends BaseEntryField {
     this.name = name;
   }
 }
+
+
+export { Entry, TriggerEntry, MedicationEntry, HeadacheEntry }

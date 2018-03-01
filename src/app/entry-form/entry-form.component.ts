@@ -21,6 +21,10 @@ export class EntryFormComponent implements OnInit {
   model: Entry;
   submitted: boolean;
 
+  newHeadache: HeadacheEntry;
+  newTrigger: TriggerEntry;
+  newMedication: MedicationEntry;
+
   constructor() {
     this.model = new Entry();
     this.submitted = false;
