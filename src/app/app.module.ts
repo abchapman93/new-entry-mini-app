@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EntryFormComponent } from './entry-form/entry-form.component';
-import { GenerateService } from './generate.service';
+// import { GenerateService } from './generate.service';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { GenerateService } from './generate.service';
     BrowserModule,
     FormsModule,
   ],
-  providers: [GenerateService],
+  providers: [],
+  // providers: [GenerateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
